@@ -2,7 +2,9 @@ package com.srikanth.io.java8.lambda;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TestJava7 {
@@ -22,6 +24,12 @@ public class TestJava7 {
 			System.out.println(fruit.toString());
 		}
 		System.out.println("*************Printing after sorting Java7 ********************");
+		//create a Map with key as FruitName and value as Fruit Object java 7
+		Map<String,Fruit> fruitMap7 = new HashMap<String,Fruit>();		
+		for(Fruit fruit: fruitList7){
+			fruitMap7.put(fruit.getName(), fruit);
+		}
+		System.out.println("Number of elements in fruitMap-7 are "+fruitMap7.size());
 		//Java8
 		System.out.println("************@@@@@@@@@@@@Java8@@@@@@@@@@@@********************");
 		List<Fruit> fruitList8 = new ArrayList<Fruit>();
@@ -30,8 +38,11 @@ public class TestJava7 {
 		fruitList8.forEach(Fruit::print);
 		//sorting based on weighted
 		System.out.println("*************Printing after sorting Java8 ********************");
-		System.out.println(fruitList8.stream().sorted().collect(Collectors.toList()));		
-		
+		System.out.println(fruitList8.stream().sorted().collect(Collectors.toList()));	
+		Map<String,Fruit> fruitMap8 = fruitList8.stream().collect(Collectors.toMap(Fruit::getName, Fruit->Fruit));
+		System.out.println("Number of elements in fruitMap-8 are "+fruitMap8.size());
+		//printing all values for map
+		fruitMap8.forEach((k,v)->v.print());
 	}
 	
 	
